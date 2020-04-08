@@ -1,0 +1,13 @@
+{
+  "name": "Derek Johstons - Mintbean Hackathon Extension",
+  "description" : "Random backgound with calculator, new tabs default page",
+  "version": "1.0",
+  "manifest_version": 2,
+  "browser_action": {
+    "default_popup": "index.html",
+    "default_icon": "favicon-32x32.png"
+  },
+  "chrome_url_overrides" : {
+    "newtab": "index.html"
+  }
+}
