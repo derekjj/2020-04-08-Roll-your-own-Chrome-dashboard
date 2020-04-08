@@ -1,19 +1,27 @@
-<template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+<template lang="pug">
+  #app
+    Calculator
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Calculator from "./components/Calculator.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
+    Calculator
+  },
+  data() {
+    return {};
+  },
+  created() {
+    fetch(`https://source.unsplash.com/1600x900/?beach`).then(response => {
+      this.backgroundImage = response.url;
+      document.body.style.backgroundColor = "white";
+      document.body.style.backgroundImage = "url('" + response.url + "')";
+    });
   }
-}
+};
 </script>
 
 <style>
@@ -24,5 +32,9 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+body {
+  min-width: 300px;
 }
 </style>
