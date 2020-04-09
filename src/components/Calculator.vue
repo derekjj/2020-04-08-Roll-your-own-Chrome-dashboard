@@ -2,7 +2,7 @@
   .container
     .row
       .col-6-md
-        .card.m-1
+        .card.m-2
           .row.m-1
             .col-12
               b-form-input(type="number" v-model="value")
@@ -14,7 +14,7 @@
             .col-3
               b-button(@click="valueAdd('9')") 9
             .col-3
-              b-button(@click="step('-')") -
+              b-button(variant="danger" @click="clear") cls
           .row.m-1
             .col-3
               b-button(@click="valueAdd('4')") 4
@@ -23,7 +23,7 @@
             .col-3
               b-button(@click="valueAdd('6')") 6
             .col-3
-              b-button(@click="step('+')") +
+              b-button(@click="step('-')") -
           .row.m-1
             .col-3
               b-button(@click="valueAdd('1')") 1
@@ -32,12 +32,12 @@
             .col-3
               b-button(@click="valueAdd('3')") 3
             .col-3
-              b-button(variant="success" @click="calculate") =
+              b-button(@click="step('+')") +
           .row.m-1
             .col-9
               | {{total}}
             .col-3
-              b-button(variant="danger" @click="clear") cls
+              b-button(variant="success" @click="calculate") =
 
 </template>
 
@@ -71,19 +71,19 @@ export default {
     calculate() {
       this.steps.push(this.value);
       let subtotal = 0;
-      let lastStep = null;
+      let action = null;
       this.steps.forEach(step => {
         if (step === "+") {
-          lastStep = step;
+          action = step;
         } else if (step === "-") {
-          lastStep = step;
+          action = step;
         } else {
-          if (lastStep === null) {
+          if (action === null) {
             subtotal = step;
           } else {
-            if (lastStep === "+") {
+            if (action === "+") {
               subtotal = parseFloat(subtotal) + parseFloat(step);
-            } else if (lastStep === "-") {
+            } else if (action === "-") {
               subtotal = parseFloat(subtotal) - parseFloat(step);
             }
           }
