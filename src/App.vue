@@ -14,12 +14,15 @@ export default {
   data() {
     return {};
   },
-  created() {
-    fetch(`https://source.unsplash.com/1600x900/?beach`).then(response => {
-      this.backgroundImage = response.url;
-      document.body.style.backgroundColor = "white";
-      document.body.style.backgroundImage = "url('" + response.url + "')";
-    });
+  async created() {
+    try {
+      let res = await fetch(
+        `https://source.unsplash.com/1600x900/?beach`
+      ).catch();
+      document.body.style.backgroundImage = (await "url('") + res.url + "')";
+    } catch (err) {
+      console.log("Failed to load random remote image,", err);
+    }
   }
 };
 </script>
